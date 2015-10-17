@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'simple_form'
 gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.5'
 
