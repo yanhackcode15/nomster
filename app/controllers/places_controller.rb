@@ -5,11 +5,19 @@ class PlacesController < ApplicationController
 
 	def new
 		@place = Place.new
+		# render :new
 	end
 
 	def create
-		Place.create(place_params)
-		redirect_to root_path
+		@place = Place.new(place_params)
+		if @place.save
+			redirect_to root_path
+			# render :new
+		else
+			render :new
+		end
+			
+	
 	end
 
 	private
