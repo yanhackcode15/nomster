@@ -4,7 +4,7 @@
 		<!-- <h1><%= place.name %></h1> -->
 		<i><%= place.address %></i><br />
 		<p><%= place.description %></p><br />
-
+		<!-- <h1><%= link_to 'Edit', edit_place_path(place) %></h1> -->
 		<% if place.user.present? %>
 			<small><%= place.user.email %></small>
 		<% end %>
