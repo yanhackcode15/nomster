@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-	before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destory]
+	before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
 	def index
 		@places = Place.page params[:page]
@@ -11,8 +11,13 @@ class PlacesController < ApplicationController
 	end
 
 	def create
-		current_user.places.create(place_params)
-		redirect_to root_path		
+		@place = current_user.places.create(place_params)
+		if @place.valid?
+			redirect_to root_path		
+		else
+			render :new, :status => :unprocessable_entity 
+		end
+			
 	
 	end
 
@@ -39,12 +44,12 @@ class PlacesController < ApplicationController
 
 	def destroy
 		@place = Place.find(params[:id])
-		if current_user == @place.user
-			@place.destroy
-			redirect_to root_path
-		elsif 
-			return render :text => 'Not Allowed', :status => :forbidden	
-		end
+		# if current_user == @place.user
+		@place.destroy
+		redirect_to root_path
+		# elsif 
+			# return render :text => 'Not Allowed', :status => :forbidden	
+		# end
 	end 
 	private
 
