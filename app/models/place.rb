@@ -4,7 +4,9 @@ class Place < ActiveRecord::Base
 	validates :description, presence: true
 	
 	belongs_to :user
-	geocoded_by :address
+	geocoded_by :addresss
 	after_validation :geocode
+
+	has_many :comments
 
 end
