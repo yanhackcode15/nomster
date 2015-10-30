@@ -44,10 +44,6 @@
 <div class ="clear"></div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Add a Comment
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -73,18 +69,30 @@
   </div>
 </div>
 
-<!-- show existing comments-->
 
-<h1>Comments</h1>
-<% @place.comments.each do |comment| %>
-	<div>
-		<blockquote>
-			<% if comment.humanized_rating.present? %>
-				<b><%= comment.humanized_rating %> </b> - 
-				<% end %>
-			<%= comment.message %>
-			<small><%= comment.user.email %> </small>
-		</blockquote>
-	</div>
+<div class="col-xs-10 col-xs-offset-1">
+	<!-- existing comments heading-->
+	<h1 class ="pull-left">Comments</h1> 
 
-<% end %>
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+	Add a Comment
+	</button>
+
+	<!-- clear the content below -->
+	<div class ="clear"></div>
+
+	<!-- Show comment blocks -->
+	<% @place.comments.each do |comment| %>
+		<div class ="col-xs-12 col-sm-6">
+			<blockquote>
+				<% if comment.humanized_rating.present? %>
+					<b><%= comment.humanized_rating %> </b> - 
+					<% end %>
+				<%= comment.message %>
+				<small><%= comment.user.email %> </small>
+			</blockquote>
+		</div>
+
+	<% end %>
+</div>
