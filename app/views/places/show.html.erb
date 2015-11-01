@@ -1,3 +1,5 @@
+
+<!-- Show place name, address, map -->
 <div class = 'booyah-box col-xs-10 col-xs-offset-1'>
 	<h1><%= @place.name %></h1>
 	<i><%= @place.address %></i>
@@ -33,7 +35,9 @@
 	<br/>
 
 	<div class ="pull-right">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPhotoModal">Upload a Photo</button>
     	<% if current_user && current_user == @place.user %>
+    		
 			<%= link_to 'Edit', edit_place_path(@place), :class => 'btn btn-primary' %>
 			<%= link_to 'Delete', place_path(@place), :method => :delete, :data => {:confirm => 'Are you sure you want to delete this?'}, :class => 'btn btn-danger' %>
 		<% end %>
@@ -43,10 +47,33 @@
 
 <div class ="clear"></div>
 
+<!-- Add a photo Modal -->
+<div class="modal fade" id="myPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add a Photo</h4>
+      </div>
+      
+      <%= simple_form_for @photo, :url => place_photos_path(@place) do |f| %>
+      	<div class="modal-body">
+      		<%= f.input :picture %>
+			<%= f.input :caption %>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<%= f.submit 'Upload a Photo', :class => 'btn btn-primary'  %>
+		</div>
+	  <% end %>
+
+    </div>
+  </div>
+</div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Add a comment Modal -->
+<div class="modal fade" id="myCommentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,7 +102,7 @@
 	<h1 class ="pull-left">Comments</h1> 
 
 	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myCommentModal">
 	Add a Comment
 	</button>
 
@@ -95,4 +122,22 @@
 		</div>
 
 	<% end %>
+
+
+	<!-- Show photos blocks -->
+	<div class ="clear"></div>
+
+	<h1 class ="pull-left">Photos</h1>
+	<div class ="clear"></div>
+	<% @place.photos.each do |photo| %>
+		<div class ="col-xs-12 col-sm-6">
+			
+			<%= photo.caption %>
+			<%= image_tag photo.picture %>	
+			<small><%= photo.user.email %> </small>
+			
+		</div>
+
+	<% end %>
+	
 </div>
