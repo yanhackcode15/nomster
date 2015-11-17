@@ -2,8 +2,10 @@ FactoryGirl.define do
   factory :comment do
     message "This place rocks!"
     rating "5_stars"
-    user_id 1
-    place 1
+    association :place
+    association :user
+    # user_id 1
+    # place 1
 
   end
 
@@ -11,12 +13,16 @@ FactoryGirl.define do
   	name "Test Place"
   	description "This is a test place description"
   	address "123 Test Street, Los Angeles, CA 90025"
-  	user_id 1
+  	# user_id 1
+  	association :user
   end
 
   factory :user do
-  	email "testuser@test.com"
+  
+    sequence :email do |n|
+      "yoloman#{n}@gmail.com"
+    end
   	password "test1234"
-  	encrypted_password "test123"
+  	password_confirmation "test1234"
   end
 end
