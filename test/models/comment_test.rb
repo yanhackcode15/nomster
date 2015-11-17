@@ -5,8 +5,8 @@ class CommentTest < ActiveSupport::TestCase
   #   assert true
   # end
   test "Humanized Rating Output" do
-  	user = FactoryGirl.create(:user)
-  	sign_in :user
+  	sign_in FactoryGirl.create(:user)
+  	
   	place = FactoryGirl.create(:place)
   	comment = FactoryGirl.create(:comment)
   	expected = "five stars"

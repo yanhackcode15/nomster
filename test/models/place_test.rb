@@ -5,8 +5,8 @@ class PlaceTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  test "place test" do
-  	assert_difference(FactoryGirl.create(:place))
-  end
+  # test "place test" do
+  # 	assert_difference(FactoryGirl.create(:place))
+  # end
 
 end
