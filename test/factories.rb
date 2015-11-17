@@ -6,6 +6,8 @@ FactoryGirl.define do
     association :user
     # user_id 1
     # place 1
+    # belongs_to :place
+    # belongs_to :user
 
   end
 
